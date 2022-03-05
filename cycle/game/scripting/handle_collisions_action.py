@@ -67,23 +67,23 @@ class HandleCollisionsAction(Action):
         
         Args:
             cast (Cast): The cast of Actors in the game."""
-        snake = cast.get_first_actor("snakes")
-        head = snake.get_segments()[0]
-        segments = snake.get_segments()[1:]
+        snake_1 = cast.get_first_actor("snake_1")
+        head_1 = snake_1.get_segments()[0]
+        segments_1 = snake_1.get_segments()[1:]
 
-        snake2 = cast.get_first_actor("snake2")
-        head2 = snake2.get_segments()[0]
-        segments2 = snake2.get_segments()[1:]
+        snake_2 = cast.get_first_actor("snake_2")
+        head_2 = snake_2.get_segments()[0]
+        segments_2 = snake_2.get_segments()[1:]
 
-        if head.get_position().equals(head2.get_position()):
+        if head_1.get_position().equals(head_2.get_position()):
             self._is_game_over = True
         
-        for segment in segments:
-            if head2.get_position().equals(segment.get_position()):
+        for segments_1 in segments_1:
+            if head_2.get_position().equals(segments_1.get_position()):
                 self._is_game_over = True
             
-        for segment2 in segments2:
-            if head.get_position().equals(segment2.get_position()):
+        for segments_2 in segments_2:
+            if head_1.get_position().equals(segments_2.get_position()):
                 self._is_game_over = True
 
     def _handle_game_over(self, cast):
@@ -93,10 +93,10 @@ class HandleCollisionsAction(Action):
             cast (Cast): The cast of Actors in the game.
         """
         if self._is_game_over:
-            snake = cast.get_first_actor("snakes")
-            snake2 = cast.get_first_actor("snake2")
-            segments = snake.get_segments()
-            segments2 = snake2.get_segments()
+            snake_1 = cast.get_first_actor("snake_1")
+            snake_2 = cast.get_first_actor("snake_2")
+            segments_1 = snake_1.get_segments()
+            segments_2 = snake_2.get_segments()
             #food = cast.get_first_actor("foods")
 
             x = int(constants.MAX_X / 2)
@@ -108,9 +108,9 @@ class HandleCollisionsAction(Action):
             message.set_position(position)
             cast.add_actor("messages", message)
 
-            for segment in segments:
+            for segment in segments_1:
                 segment.set_color(constants.WHITE)
             #food.set_color(constants.WHITE)
 
-            for segment2 in segments2:
-                segment2.set_color(constants.WHITE)
+            for segment in segments_2:
+                segment.set_color(constants.WHITE)

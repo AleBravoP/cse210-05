@@ -1,4 +1,8 @@
+import importlib
+from turtle import color
 import constants
+import pyray
+from constants import MAX_X, MAX_Y
 
 from game.casting.cast import Cast
 from game.casting.food import Food
@@ -20,8 +24,12 @@ def main():
     
     # create the cast
     cast = Cast()
-    cast.add_actor("foods", Food())
-    cast.add_actor("snakes", Snake())
+    # cast.add_actor("foods", Food()) - might add at later time.
+    x = MAX_X / 4
+    y = MAX_Y / 4
+    cast.add_actor("snake 1", Snake(x, y, constants.GREEN))
+    x = x * 3
+    cast.add_actor("snake 2", Snake(x, y, constants.RED))
     cast.add_actor("scores", Score())
    
     # start the game

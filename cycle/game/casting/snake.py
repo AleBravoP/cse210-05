@@ -1,3 +1,4 @@
+from turtle import color
 import constants
 from game.casting.actor import Actor
 from game.shared.point import Point
@@ -12,10 +13,11 @@ class Snake(Actor):
     Attributes:
         _points (int): The number of points the food is worth.
     """
-    def __init__(self):
+    def __init__(self, x, y, color):
         super().__init__()
         self._segments = []
-        self._prepare_body()
+        self._prepare_body(x, y, color)
+
 
     def get_segments(self):
         return self._segments
@@ -51,15 +53,12 @@ class Snake(Actor):
     def turn_head(self, velocity):
         self._segments[0].set_velocity(velocity)
     
-    def _prepare_body(self):
-        x = int(constants.MAX_X / 2)
-        y = int(constants.MAX_Y / 2)
+    def _prepare_body(self, x, y, color):
 
         for i in range(constants.SNAKE_LENGTH):
             position = Point(x - i * constants.CELL_SIZE, y)
             velocity = Point(1 * constants.CELL_SIZE, 0)
             text = "8" if i == 0 else "#"
-            color = constants.YELLOW if i == 0 else constants.GREEN
             
             segment = Actor()
             segment.set_position(position)

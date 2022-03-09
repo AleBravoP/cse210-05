@@ -24,7 +24,8 @@ class Director:
         """
         self._video_service.open_window()
         while self._video_service.is_window_open():
-            self._execute_actions("input", cast, script)
+            self._execute_actions("input_1", cast, script)
+            self._execute_actions("input_2", cast, script)
             self._execute_actions("update", cast, script)
             self._execute_actions("output", cast, script)
         self._video_service.close_window()

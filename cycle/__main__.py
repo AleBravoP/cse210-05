@@ -1,8 +1,12 @@
+import importlib
+from turtle import color
 import constants
+import pyray
+from constants import MAX_X, MAX_Y
 
 from game.casting.cast import Cast
 from game.casting.food import Food
-from game.casting.score import Score
+# from game.casting.score import Score
 from game.casting.snake import Snake
 from game.scripting.script import Script
 from game.scripting.control_actors_action import ControlActorsAction
@@ -20,16 +24,21 @@ def main():
     
     # create the cast
     cast = Cast()
-    cast.add_actor("foods", Food())
-    cast.add_actor("snakes", Snake())
-    cast.add_actor("scores", Score())
+    # cast.add_actor("foods", Food()) - might add at later time.
+    x = MAX_X / 4
+    y = MAX_Y / 4
+    cast.add_actor("snake_1", Snake(x, y, constants.GREEN))
+    x = x * 3
+    cast.add_actor("snake_2", Snake(x, y, constants.RED))
+    # cast.add_actor("scores", Score())
    
     # start the game
     keyboard_service = KeyboardService()
     video_service = VideoService()
 
     script = Script()
-    script.add_action("input", ControlActorsAction(keyboard_service))
+    script.add_action("input_1", ControlActorsAction(keyboard_service, "snake_1", "a", "d", "w", "s"))
+    script.add_action("input_2", ControlActorsAction(keyboard_service, "snake_2", "j", "l", "i", "k"))
     script.add_action("update", MoveActorsAction())
     script.add_action("update", HandleCollisionsAction())
     script.add_action("output", DrawActorsAction(video_service))

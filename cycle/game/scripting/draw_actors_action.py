@@ -34,6 +34,11 @@ class DrawActorsAction(Action):
         segments_2 = snake_2.get_segments()
         messages = cast.get_actors("messages")
 
+         # This will make the tail grow by one for each cell it advances 
+        # (leave it fixated to the starting point)
+        snake_1.grow_tail(1)
+        snake_2.grow_tail(1)
+
         self._video_service.clear_buffer()
         # self._video_service.draw_actor(food)
         self._video_service.draw_actors(segments_1)

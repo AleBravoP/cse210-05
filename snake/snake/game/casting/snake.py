@@ -1,6 +1,7 @@
 import constants
 from game.casting.actor import Actor
 from game.shared.point import Point
+import threading
 
 
 class Snake(Actor):
@@ -16,6 +17,7 @@ class Snake(Actor):
         super().__init__()
         self._segments = []
         self._prepare_body()
+        self.grow_tail_timed()
 
     def get_segments(self):
         return self._segments
@@ -67,3 +69,8 @@ class Snake(Actor):
             segment.set_text(text)
             segment.set_color(color)
             self._segments.append(segment)
+
+    def grow_tail_timed(self):
+        """Makes the tail grow by 5 segments every second."""
+        threading.Timer(1.0, self.grow_tail_timed).start()
+        self.grow_tail(5)

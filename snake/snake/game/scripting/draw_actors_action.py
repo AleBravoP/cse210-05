@@ -32,7 +32,7 @@ class DrawActorsAction(Action):
         segments = snake.get_segments()
         # This will make the tail grow by one for each cell it advances 
         # (leave it fixated to the starting point)
-        snake.grow_tail(1)
+        # snake.grow_tail(1)
         messages = cast.get_actors("messages")
 
         self._video_service.clear_buffer()
